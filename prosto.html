@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطعم بروستو - أفضل دجاج بروستد في الأردن</title>
+    <style>
+        :root {
+            --main-red: #d62828;
+            --dark-red: #a32020;
+            --light-red: #ff4d4d;
+            --bg-color: #fff5f5;
+            --text-color: #333;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Tajawal', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .pepper-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--main-red);
+            opacity: 0.05;
+            z-index: -1;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10 L60 30 L80 35 L65 50 L70 70 L50 60 L30 70 L35 50 L20 35 L40 30 Z" fill="%23ffffff" opacity="0.1"/></svg>');
+            background-size: 200px 200px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--main-red);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+        }
+        
+        .page {
+            display: none;
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: var(--main-red);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--main-red);
+            padding-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--main-red);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--main-red);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(214, 40, 40, 0.2);
+        }
+        
+        button {
+            background-color: var(--main-red);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        button:hover {
+            background-color: var(--dark-red);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: var(--main-red);
+        }
+        
+        .menu-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-left: 15px;
+        }
+        
+        .menu-item-info {
+            flex: 1;
+        }
+        
+        .menu-item-info h3 {
+            color: var(--main-red);
+            margin-bottom: 5px;
+        }
+        
+        .menu-item-info p {
+            margin-bottom: 10px;
+        }
+        
+        .menu-item-price {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--dark-red);
+        }
+        
+        .branch-card {
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .branch-card:hover {
+            border-color: var(--main-red);
+            transform: translateX(5px);
+        }
+        
+        .branch-card.selected {
+            background-color: #ffecec;
+            border-color: var(--main-red);
+        }
+        
+        .branch-card h3 {
+            color: var(--main-red);
+            margin-bottom: 5px;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-total {
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            color: var(--dark-red);
+        }
+        
+        .rating-stars {
+            text-align: center;
+            margin: 20px 0;
+            direction: ltr;
+        }
+        
+        .rating-stars span {
+            font-size: 40px;
+            cursor: pointer;
+            color: #ddd;
+            transition: all 0.2s;
+            margin: 0 5px;
+        }
+        
+        .rating-stars span.selected {
+            color: var(--main-red);
+        }
+        
+        .thank-you {
+            text-align: center;
+            color: var(--main-red);
+            font-size: 1.5rem;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .menu-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .menu-item img {
+                margin-left: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="pepper-background"></div>
+    
+    <div class="container">
+        <header>
+            <h1>مطعم بروستو</h1>
+            <p>أشهى دجاج بروستد في الأردن</p>
+        </header>
+        
+        <section id="welcome-page" class="page active">
+            <h2>مرحباً بكم في مطعم بروستو</h2>
+            <p style="text-align: center; margin-bottom: 30px;">نقدم لكم أشهى وأطيب وجبات الدجاج البروستد في الاردن</p>
+            <button id="start-btn">استمر</button>
+        </section>
+        
+        <section id="customer-page" class="page">
+            <h2>بيانات العميل</h2>
+            <div class="form-group">
+                <label for="customer-name">الاسم</label>
+                <input type="text" id="customer-name" placeholder="الاسم "required>
+            </div>
+            <div class="form-group">
+                <label for="customer-phone">رقم الهاتف</label>
+                <input type="tel" id="customer-phone" placeholder="07XXXXXXXX " required>
+            </div>
+            <button id="customer-next-btn">التالي</button>
+        </section>
+        
+        <section id="location-page" class="page">
+            <h2>مكان التوصيل</h2>
+            <div class="form-group">
+                <label for="customer-address">العنوان</label>
+                <input type="text" id="customer-address" placeholder="المدينة ,الحي ,الشارع  "required>
+            </div>
+            <button id="location-next-btn">البحث عن أقرب فرع</button>
+        </section>
+        
+        <section id="branches-page" class="page">
+            <h2>اختر أقرب فرع إليك</h2>
+            <div id="branches-list">
+                <!-- سيتم تعبئتها بالجافاسكريبت -->
+            </div>
+            <button id="branches-next-btn" disabled>التالي</button>
+        </section>
+        
+        <section id="menu-page" class="page">
+            <h2>قائمة الطعام</h2>
+            <div id="menu-items">
+                <!-- سيتم تعبئتها بالجافاسكريبت -->
+            </div>
+            <button id="menu-next-btn">عرض السلة</button>
+        </section>
+        
+        <section id="cart-page" class="page">
+            <h2>سلة المشتريات</h2>
+            <div id="cart-items">
+                <!-- سيتم تعبئتها بالجافاسكريبت -->
+            </div>
+            <div class="cart-total">المجموع: <span id="total-amount">0.00</span> دينار</div>
+            <button id="cart-next-btn" disabled>إتمام الطلب</button>
+        </section>
+        
+        <section id="payment-page" class="page">
+            <h2>طريقة الدفع</h2>
+            <div class="form-group">
+                <label>
+                    <input type="radio" name="payment" value="cash" checked> 
+                    الدفع نقداً عند الاستلام
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="radio" name="payment" value="card"> 
+                    الدفع بالبطاقة الائتمانية
+                </label>
+            </div>
+            <button id="payment-next-btn">تأكيد الطلب</button>
+        </section>
+        
+        <section id="rating-page" class="page">
+            <h2>تقييم الخدمة</h2>
+            <p style="text-align: center; margin-bottom: 20px;">كيف كانت تجربتك مع تطبيق بروستو؟</p>
+            
+            <div class="rating-stars">
+                <span data-value="1">★</span>
+                <span data-value="2">★</span>
+                <span data-value="3">★</span>
+                <span data-value="4">★</span>
+                <span data-value="5">★</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="feedback">ملاحظاتك (اختياري)</label>
+                <textarea id="feedback" rows="4" placeholder="اكتب ملاحظاتك هنا..."></textarea>
+            </div>
+            
+            <button id="submit-rating-btn">إرسال التقييم</button>
+            <div class="thank-you" id="thank-you-message">شكراً لك! تم استلام تقييمك</div>
+        </section>
+    </div>
+
+    <script>
+        // بيانات الفروع المحدثة
+        const branches = [
+            { id: 1, name: "شارع المدينة", address: "شارع المدينة المنورة" },
+            { id: 2, name: "طبربور", address: "طبربور، شارع الجامعات" },
+            { id: 3, name: "دابوق", address: "دابوق، شارع الدابوق الرئيسي" },
+            { id: 4, name: "عبدالله غوشة", address: "شارع عبدالله غوشة" },
+            { id: 5, name: "أبو نصير", address: "أبو نصير، شارع أبو نصير الرئيسي" }
+        ];
+
+        // قائمة الطعام المحدثة حسب الطلب
+        const menuItems = [
+            // برجر
+            { id: 1, name: "برجر كلاسيك", price: 2.25, category: "برجر", image:"classic.img.jpg" },
+            { id: 2, name: "هالك برجر", price: 2.35, category: "برجر", image:"hullk.jpg" },
+            
+            // ساندويشات
+            { id: 3, name: "بروستو رول", price: 1.75, category: "ساندويشات", image:"roll.jpg" },
+            { id: 4, name: "ساندويش نشامى", price: 1.50, category: "ساندويشات", image: "nashama.jpg" },
+            { id: 5, name: "ساندويش زنجر", price: 1.70, category: "ساندويشات", image: "zinger.img.jpg" },
+            
+            // بروستد
+            { id: 6, name: "4 قطع بروستد", price: 3.50, category: "بروستد", image: "chic4.jpg" },
+            { id: 7, name: "8 قطع بروستد", price: 6.50, category: "بروستد", image: "chic8.jpg" },
+            { id: 8, name: "16 قطعة بروستد", price: 12.50, category: "بروستد", image: "chic16.jpg" },
+            
+            // ستربس
+            { id: 9, name: "4 قطع ستربس", price: 3.25, category: "ستربس", image: "strips.jpg" },
+            { id: 10, name: "7 قطع ستربس", price: 5.00, category: "ستربس", image: "strips7.jpg" },
+            
+            // مشروبات
+            { id: 11, name: "مشروب غازي", price: 0.40, category: "مشروبات", image: "pepsi.jpg" }
+            
+        ];
+
+        // متغيرات التطبيق
+        let currentPage = 'welcome';
+        let selectedBranch = null;
+        let cart = [];
+        let selectedRating = 0;
+
+        // عناصر DOM
+        const pages = {
+            welcome: document.getElementById('welcome-page'),
+            customer: document.getElementById('customer-page'),
+            location: document.getElementById('location-page'),
+            branches: document.getElementById('branches-page'),
+            menu: document.getElementById('menu-page'),
+            cart: document.getElementById('cart-page'),
+            payment: document.getElementById('payment-page'),
+            rating: document.getElementById('rating-page')
+        };
+
+        // الأحداث
+        document.getElementById('start-btn').addEventListener('click', () => {
+            showPage('customer');
+        });
+
+        document.getElementById('customer-next-btn').addEventListener('click', () => {
+            const name = document.getElementById('customer-name').value.trim();
+            const phone = document.getElementById('customer-phone').value.trim();
+            
+            if (!name || !phone) {
+                alert('الرجاء إدخال جميع البيانات المطلوبة');
+                return;
+            }
+            
+            if (!/^(07|06)\d{7,8}$/.test(phone)) {
+                alert('رقم الهاتف غير صحيح. يجب أن يبدأ بـ 07 أو 06 ويتكون من 9 أو 10 أرقام');
+                return;
+            }
+            
+            showPage('location');
+        });
+
+        document.getElementById('location-next-btn').addEventListener('click', () => {
+            const address = document.getElementById('customer-address').value.trim();
+            
+            if (!address) {
+                alert('الرجاء إدخال العنوان');
+                return;
+            }
+            
+            loadBranches();
+            showPage('branches');
+        });
+
+        document.getElementById('branches-next-btn').addEventListener('click', () => {
+            if (!selectedBranch) {
+                alert('الرجاء اختيار فرع');
+                return;
+            }
+            
+            loadMenu();
+            showPage('menu');
+        });
+
+        document.getElementById('menu-next-btn').addEventListener('click', () => {
+            updateCart();
+            showPage('cart');
+        });
+
+        document.getElementById('cart-next-btn').addEventListener('click', () => {
+            showPage('payment');
+        });
+
+        document.getElementById('payment-next-btn').addEventListener('click', () => {
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            
+            alert(`تم استلام طلبك بنجاح! طريقة الدفع: ${paymentMethod === 'cash' ? 'نقداً عند الاستلام' : 'البطاقة الائتمانية'}`);
+            
+            showPage('rating');
+        });
+
+        document.getElementById('submit-rating-btn').addEventListener('click', () => {
+            const feedback = document.getElementById('feedback').value;
+            
+            document.getElementById('thank-you-message').style.display = 'block';
+            document.getElementById('submit-rating-btn').disabled = true;
+            
+            setTimeout(() => {
+                resetApp();
+            }, 3000);
+        });
+
+        // معالجات أحداث النجوم
+        document.querySelectorAll('.rating-stars span').forEach(star => {
+            star.addEventListener('click', function() {
+                selectedRating = parseInt(this.getAttribute('data-value'));
+                
+                document.querySelectorAll('.rating-stars span').forEach((s, index) => {
+                    if (index < selectedRating) {
+                        s.classList.add('selected');
+                    } else {
+                        s.classList.remove('selected');
+                    }
+                });
+            });
+        });
+
+        // وظائف المساعدة
+        function showPage(pageId) {
+            Object.values(pages).forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            pages[pageId].classList.add('active');
+            currentPage = pageId;
+            
+            window.scrollTo(0, 0);
+        }
+
+        function loadBranches() {
+            const branchesList = document.getElementById('branches-list');
+            branchesList.innerHTML = '';
+            
+            branches.forEach(branch => {
+                const branchElement = document.createElement('div');
+                branchElement.className = 'branch-card';
+                branchElement.innerHTML = `
+                    <h3>${branch.name}</h3>
+                    <p>${branch.address}</p>
+                `;
+                
+                branchElement.addEventListener('click', () => {
+                    document.querySelectorAll('.branch-card').forEach(b => {
+                        b.classList.remove('selected');
+                    });
+                    
+                    branchElement.classList.add('selected');
+                    selectedBranch = branch;
+                    
+                    document.getElementById('branches-next-btn').disabled = false;
+                });
+                
+                branchesList.appendChild(branchElement);
+            });
+        }
+
+        function loadMenu() {
+            const menuItemsContainer = document.getElementById('menu-items');
+            menuItemsContainer.innerHTML = '';
+            
+            // تجميع العناصر حسب الفئة
+            const categories = {};
+            menuItems.forEach(item => {
+                if (!categories[item.category]) {
+                    categories[item.category] = [];
+                }
+                categories[item.category].push(item);
+            });
+            
+            // عرض العناصر مصنفة
+            for (const category in categories) {
+                const categoryHeader = document.createElement('h3');
+                categoryHeader.style.color = 'var(--main-red)';
+                categoryHeader.style.marginTop = '20px';
+                categoryHeader.style.borderBottom = '1px solid var(--main-red)';
+                categoryHeader.style.paddingBottom = '5px';
+                categoryHeader.textContent = category;
+                menuItemsContainer.appendChild(categoryHeader);
+                
+                categories[category].forEach(item => {
+                    const menuItemElement = document.createElement('div');
+                    menuItemElement.className = 'menu-item';
+                    menuItemElement.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="menu-item-info">
+                            <h3>${item.name}</h3>
+                            <p>${item.description || 'وجبة لذيذة من مطعم بروستو'}</p>
+                            <div class="menu-item-price">${item.price.toFixed(2)} دينار</div>
+                            <button class="add-to-cart" data-id="${item.id}">أضف إلى السلة</button>
+                        </div>
+                    `;
+                    
+                    menuItemsContainer.appendChild(menuItemElement);
+                });
+            }
+            
+            // إضافة معالج الأحداث لأزرار "أضف إلى السلة"
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = parseInt(this.getAttribute('data-id'));
+                    const item = menuItems.find(i => i.id === itemId);
+                    
+                    if (item) {
+                        const existingItem = cart.find(i => i.id === itemId);
+                        
+                        if (existingItem) {
+                            existingItem.quantity++;
+                        } else {
+                            cart.push({
+                                id: item.id,
+                                name: item.name,
+                                price: item.price,
+                                quantity: 1
+                            });
+                        }
+                        
+                        alert(`تمت إضافة ${item.name} إلى سلة التسوق`);
+                    }
+                });
+            });
+        }
+
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align: center;">السلة فارغة</p>';
+                document.getElementById('cart-next-btn').disabled = true;
+                document.getElementById('total-amount').textContent = '0.00';
+                return;
+            }
+            
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item';
+                cartItemElement.innerHTML = `
+                    <div>
+                        <strong>${item.name}</strong>
+                        <div>${item.quantity} × ${item.price.toFixed(2)} دينار</div>
+                    </div>
+                    <div>${itemTotal.toFixed(2)} دينار</div>
+                `;
+                
+                cartItemsContainer.appendChild(cartItemElement);
+            });
+            
+            document.getElementById('total-amount').textContent = total.toFixed(2);
+            document.getElementById('cart-next-btn').disabled = false;
+        }
+
+        function resetApp() {
+            document.getElementById('customer-name').value = '';
+            document.getElementById('customer-phone').value = '';
+            document.getElementById('customer-address').value = '';
+            document.getElementById('feedback').value = '';
+            
+            selectedBranch = null;
+            cart = [];
+            selectedRating = 0;
+            8
+            document.querySelectorAll('.rating-stars span').forEach(star => {
+                star.classList.remove('selected');
+            });
+            
+            document.querySelectorAll('.branch-card').forEach(branch => {
+                branch.classList.remove('selected');
+            });
+            
+            document.getElementById('submit-rating-btn').disabled = false;
+            document.getElementById('thank-you-message').style.display = 'none';
+            
+            showPage('welcome');
+        }
+    </script>
+</body>
+</html>

@@ -268,6 +268,17 @@
             display: none;
         }
         
+        .back-button {
+            background-color: #f8f9fa;
+            color: var(--main-red);
+            border: 1px solid var(--main-red);
+            margin-bottom: 15px;
+        }
+        
+        .back-button:hover {
+            background-color: #f1f1f1;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -306,6 +317,7 @@
         </section>
         
         <section id="customer-page" class="page">
+            <button class="back-button" onclick="showPage('welcome')">← الصفحة السابقة</button>
             <h2>بيانات العميل</h2>
             <div class="form-group">
                 <label for="customer-name">الاسم</label>
@@ -319,6 +331,7 @@
         </section>
         
         <section id="location-page" class="page">
+            <button class="back-button" onclick="showPage('customer')">← الصفحة السابقة</button>
             <h2>مكان التوصيل</h2>
             <div class="form-group">
                 <label for="customer-address">العنوان</label>
@@ -328,6 +341,7 @@
         </section>
         
         <section id="branches-page" class="page">
+            <button class="back-button" onclick="showPage('location')">← الصفحة السابقة</button>
             <h2>اختر أقرب فرع إليك</h2>
             <div id="branches-list">
                 <!-- سيتم تعبئتها بالجافاسكريبت -->
@@ -336,6 +350,7 @@
         </section>
         
         <section id="menu-page" class="page">
+            <button class="back-button" onclick="showPage('branches')">← الصفحة السابقة</button>
             <h2>قائمة الطعام</h2>
             <div id="menu-items">
                 <!-- سيتم تعبئتها بالجافاسكريبت -->
@@ -344,6 +359,7 @@
         </section>
         
         <section id="cart-page" class="page">
+            <button class="back-button" onclick="showPage('menu')">← الصفحة السابقة</button>
             <h2>سلة المشتريات</h2>
             <div id="cart-items">
                 <!-- سيتم تعبئتها بالجافاسكريبت -->
@@ -353,6 +369,7 @@
         </section>
         
         <section id="payment-page" class="page">
+            <button class="back-button" onclick="showPage('cart')">← الصفحة السابقة</button>
             <h2>طريقة الدفع</h2>
             <div class="form-group">
                 <label>
@@ -370,6 +387,7 @@
         </section>
         
         <section id="rating-page" class="page">
+            <button class="back-button" onclick="showPage('payment')">← الصفحة السابقة</button>
             <h2>تقييم الخدمة</h2>
             <p style="text-align: center; margin-bottom: 20px;">كيف كانت تجربتك مع تطبيق بروستو؟</p>
             
@@ -679,7 +697,7 @@
             selectedBranch = null;
             cart = [];
             selectedRating = 0;
-            8
+            
             document.querySelectorAll('.rating-stars span').forEach(star => {
                 star.classList.remove('selected');
             });
@@ -695,7 +713,4 @@
         }
     </script>
 </body>
-
 </html>
-
-

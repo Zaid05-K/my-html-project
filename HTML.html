@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>مطعم بروستو - أفضل دجاج بروستد في الأردن</title>
+ <link rel="stylesheet" href="HTML.css">
+ 
+</head>
+<body>
+
+   
+      <div class="pepper-background"></div>
+
+    <div class="container">
+        <header>
+            <h1>مطعم بروستو</h1>
+            <p>أشهى دجاج بروستد في الأردن</p>
+        </header>
+
+        <section id="welcome-page" class="page active">
+            <h2>مرحباً بكم في مطعم بروستو</h2>
+            <p style="text-align: center; margin-bottom: 30px;">نقدم لكم أشهى وأطيب وجبات الدجاج البروستد في الاردن</p>
+            <button id="start-btn">استمر</button>
+        </section>
+
+        <section id="customer-page" class="page">
+            <button class="back-button" onclick="showPage('welcome')">← الصفحة السابقة</button>
+            <h2>بيانات العميل</h2>
+            <div class="form-group">
+                <label for="customer-name">الاسم</label>
+                <input type="text" id="customer-name" placeholder="الاسم "required>
+            </div>
+            <div class="form-group">
+                <label for="customer-phone">رقم الهاتف</label>
+                <input type="tel" id="customer-phone" placeholder="07XXXXXXXX " required>
+            </div>
+            <button id="customer-next-btn">التالي</button>
+        </section>
+
+        <section id="location-page" class="page">
+            <button class="back-button" onclick="showPage('customer')">← الصفحة السابقة</button>
+            <h2>مكان التوصيل</h2>
+            <div class="form-group">
+                <label for="customer-address">العنوان</label>
+                <input type="text" id="customer-address" placeholder="المدينة ,الحي ,الشارع  "required>
+            </div>
+            <button id="location-next-btn">البحث عن أقرب فرع</button>
+        </section>
+
+        <section id="branches-page" class="page">
+            <button class="back-button" onclick="showPage('location')">← الصفحة السابقة</button>
+            <h2>اختر أقرب فرع إليك</h2>
+            <div id="branches-list">
+                <!-- سيتم تعبئتها بالجافاسكريبت -->
+            </div>
+            <button id="branches-next-btn" disabled>التالي</button>
+        </section>
+
+        <section id="menu-page" class="page">
+            <button class="back-button" onclick="showPage('branches')">← الصفحة السابقة</button>
+            <h2>قائمة الطعام</h2>
+            <div id="menu-items">
+                <!-- سيتم تعبئتها بالجافاسكريبت -->
+            </div>
+            <button id="menu-next-btn">عرض السلة</button>
+        </section>
+
+        <section id="cart-page" class="page">
+            <button class="back-button" onclick="showPage('menu')">← الصفحة السابقة</button>
+            <h2>سلة المشتريات</h2>
+            <div id="cart-items">
+                <!-- سيتم تعبئتها بالجافاسكريبت -->
+            </div>
+            <div class="cart-total">المجموع: <span id="total-amount">0.00</span> دينار</div>
+            <button id="cart-next-btn" disabled>إتمام الطلب</button>
+        </section>
+
+        <section id="payment-page" class="page">
+            <button class="back-button" onclick="showPage('cart')">← الصفحة السابقة</button>
+            <h2>طريقة الدفع</h2>
+            <div class="form-group">
+                <label>
+                    <input type="radio" name="payment" value="cash" checked> 
+                    الدفع نقداً عند الاستلام
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="radio" name="payment" value="card"> 
+                    الدفع بالبطاقة الائتمانية
+                </label>
+            </div>
+            <button id="payment-next-btn">تأكيد الطلب</button>
+        </section>
+
+        <section id="rating-page" class="page">
+            <button class="back-button" onclick="showPage('payment')">← الصفحة السابقة</button>
+            <h2>تقييم الخدمة</h2>
+            <p style="text-align: center; margin-bottom: 20px;">كيف كانت تجربتك مع تطبيق بروستو؟</p>
+
+            <div class="rating-stars">
+                <span data-value="1">★</span>
+                <span data-value="2">★</span>
+                <span data-value="3">★</span>
+                <span data-value="4">★</span>
+                <span data-value="5">★</span>
+            </div>
+
+            <div class="form-group">
+                <label for="feedback">ملاحظاتك (اختياري)</label>
+                <textarea id="feedback" rows="4" placeholder="اكتب ملاحظاتك هنا..."></textarea>
+            </div>
+
+            <button id="submit-rating-btn">إرسال التقييم</button>
+            <div class="thank-you" id="thank-you-message">شكراً لك! تم استلام تقييمك</div>
+        </section>
+    </div>
+
+    
+     <script src="HTML.JS"></script>
+</body>
+</html>
